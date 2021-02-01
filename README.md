@@ -16,3 +16,19 @@ REQUIREMENTS:
 SOFTWARE REQUIREMENTS:
     • Microsoft visual studio(any latest version)
     • SQL server database(any latest version >2008)
+    
+WORKING:
+  In operations crud, admin can edit details for vehicle type, vehicle amount, no. of parking floors, total no of parking slots and amount to be generated for each vehicle.
+  Admins can also select whether the report is to be generated daily, monthly or yearly and can send the relevant authorities. Admin can also send mail directly from the operation crud. In the reports crud, admin can generate report from whatever time frame he want.
+  
+BENIFICIARIES:
+    • National Highways Authority
+    • Contractors
+    • Private Construction Companies
+    • KDA/CDGK
+    • Malls, Hospitals, Shopping Centers, Restuarants(for parking lot)
+
+
+CONCLUSION:
+Our application was designed in such a way that there is a room for improvements in the future. Our project is user friendly and easy to use. 
+  
