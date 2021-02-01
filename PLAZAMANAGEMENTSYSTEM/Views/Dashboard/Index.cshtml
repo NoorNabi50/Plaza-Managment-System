@@ -1,0 +1,291 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    List<PLAZAMANAGEMENTSYSTEM.Models.VehicleInfo> Allvehicles = new PLAZAMANAGEMENTSYSTEM.Models.VehicleInfo().GetAllVehicle();
+}
+
+
+
+<div class="container-fluid">
+
+
+
+    <div class="card-columns">
+
+
+        <div class="panel-body">
+            <div class="row">
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="bg-primary">
+                            <div class="card-body text-center">
+                                <h5 class="card-text">Total Slots Available</h5>
+
+                                <span id="soltsAvailable" style="font-size:22px;">
+
+
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="bg-primary">
+                            <div class="card-body text-center">
+                                <h5 class="card-text">Total Cars Parked Today </h5>
+
+
+
+                                <span id="carsParked" style="font-size:22px;">
+
+
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-lg-4">
+                        <div class="bg-primary">
+                            <div class="card-body text-center">
+                                <h5 class="card-text">Total Amount Collected Today </h5>
+
+
+
+                                <span id="amountcollected" style="font-size:22px;">
+
+
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <br />
+
+
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+              <h6 class="panel-title">Vehicle Information<a class="heading-elements-toggle"><i class="icon-more"></i></a></h6>
+
+        </div>
+
+        <div class="panel-body">
+
+            <form id="VehicleInfoForm" class="form-validate-jquery" novalidate="novalidate">
+
+                <div class="form-group">
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label class="control-label">Vehicle No Plate <span class="text-danger">*</span> </label>
+                            <input class="form-control border-800" id="VehicleNoPlate" name="VehicleNoPlate" required="required" type="text" />
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="control-label">Vehicle Color <span class="text-danger">*</span></label>
+                            <input class="form-control border-800" name="Color" id="Color" type="text" />
+                        </div>
+
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-lg-6">
+                            <label class="control-label">Vehicle Type <span class="text-danger">*</span> </label>
+                            @{
+                                List<PLAZAMANAGEMENTSYSTEM.Models.VehicleType> vehicleType = new PLAZAMANAGEMENTSYSTEM.Models.VehicleType().GetAllVehicleType();
+                            }
+                            @Html.DropDownList("VehicleTypeId", vehicleType.Select(p => new SelectListItem() { Text = p.TypeName, Value = p.VehicleTypeId.ToString() }), new { @class = "form-control selectpicker border-800", data_style = "btn-default btn-xs", data_width = "100%" })
+
+                        </div>
+
+
+                        <div class="col-lg-6">
+                            <label class="control-label">Amount <span class="text-danger">*</span></label>
+                            <input class="form-control" name="Amount" id="VAmount" type="number" />
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-lg-6">
+                            <label class="control-label">Slot Name <span class="text-danger">*</span> </label>
+                            @{
+                                List<PLAZAMANAGEMENTSYSTEM.Models.ParkingSlot> parkingSlots = new PLAZAMANAGEMENTSYSTEM.Models.ParkingSlot().GetAllParkingSlotHavingSpace();
+                            }
+                            @Html.DropDownList("SlotId", parkingSlots.Select(p => new SelectListItem() { Text = p.SlotName, Value = p.SlotId.ToString() }), new { @class = "form-control selectpicker border-800", data_style = "btn-default btn-xs", data_width = "100%" })
+
+
+
+                        </div>
+
+                        <div class="col-lg-6">
+                            <label class="control-label">Floor Name <span class="text-danger">*</span> </label>
+                            <input class="form-control" type="text" name="FloorName" id="FName" />
+                            <input type="number" hidden id="floorId" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <button type="button" id="saveVinfo" class="btn btn-lg btn-primary">Save</button>
+                    </div>
+                    <div class="col-lg-6">
+
+                    </div>
+
+                    <div class="col-lg-6">
+                        <button type="button" id="Receipt" class="btn btn-lg pull-right btn-info">Print Receipt <i class="icon-files-empty2"></i> </button>
+                    </div>
+
+                </div>
+            </form>
+
+
+
+            <input type="number" hidden id="VId" />
+
+        </div>
+
+    </div>
+
+
+    <div class="panel panel-primary">
+
+        <div class="panel-heading mb-5">
+            <h6 class="panel-title">Send Email<a class="heading-elements-toggle"><i class="icon-more"></i></a></h6>
+
+        </div>
+
+        <div class="panel-body">
+
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <label class="control-label">Email <span class="text-danger">*</span> </label>
+                    <input class="form-control border-800" placeholder="Enter Email" id="email" name="Email" required="required" type="email" />
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <label class="control-label"> Message <span class="text-danger">*</span></label>
+                    <textarea class="form-control border-800" rows="7" cols="80" placeholder="Enter Message Here " name="Message" id="message"></textarea>
+
+                </div>
+
+
+            </div>
+
+          
+
+
+
+
+
+
+            <div class="row mt-20">
+
+                <div class="col-lg-6">
+                    <button type="button" class="btn btn-info" id="emailBtn"> Email <i class="icon-mail5"> </i></button>
+                </div>
+            </div>
+
+
+        </div>
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <div class="panel panel-primary">
+
+                <div class="panel-heading mb-5">
+                    <h6 class="panel-title">Vehicles Passed<a class="heading-elements-toggle"><i class="icon-more"></i></a></h6>
+
+                </div>
+
+                <div class="panel-body">
+
+                    <div class="table-responsive">
+
+
+                        <table class="jqueryTblPlugin table table-xxs table-condensed table-bordered table-striped table-hover bg-lightgray">
+
+                            <thead>
+                                <tr class="bg-primary">
+                                    <th>Vehicle No</th>
+                                    <th>Color</th>
+                                    <th>Amount</th>
+                                    <th>Date</th>
+                                    <th>Type Name</th>
+                                </tr>
+                            </thead>
+
+                            <tbody class="myFloorbody">
+
+                                @foreach (var v in Allvehicles)
+                                {
+                                    <tr>
+
+                                        <td>@v.VehicleNoPlate</td>
+                                        <td>@v.Color</td>
+                                        <td>@v.Amount</td>
+                                        <td>@v.Date</td>
+                                        <td>@v.TypeName</td>
+
+                                    </tr>
+
+                                }
+                            </tbody>
+
+                        </table>
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <script src="~/Javascript/Dashboard.js"></script>
+

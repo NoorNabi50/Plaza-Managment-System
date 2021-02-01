@@ -1,0 +1,144 @@
+﻿@model IEnumerable<PLAZAMANAGEMENTSYSTEM.Models.VehicleType>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+
+<div class="panel panel-flat">
+
+    <div class="panel-heading mb-5">
+    
+        <h1><u>Vehicle Type</u></h1>
+        <div class="col-sm-12">
+            <a class="btn bg-primary-800 btn-sm pull-right" data-toggle="modal" data-target="#VehicleTypeForm">Add <i class="icon-add"></i></a>
+        </div>
+
+    </div>
+        <div class="panel-body">
+
+        <div class="table-responsive">
+
+
+            <table class="jqueryTblPlugin table table-xxs table-md table-condensed table-bordered table-striped table-hover bg-lightgray">
+
+                <thead>
+                    <tr class="bg-primary">
+                        <th>VehicleType Name</th>
+                        <th>Actions</th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    @foreach (PLAZAMANAGEMENTSYSTEM.Models.VehicleType item in Model)
+                    {
+                        <tr>
+
+                            <td>@item.TypeName</td>
+                            <td>
+                                <div class="row">
+
+                                    <div class="col-md-6">
+                                        <span class="Edit text-blue cpointer" id="@item.VehicleTypeId" data-toggle="modal" data-target="#VehicleTypeEdit"><i class="icon-pencil7"></i></span>
+
+                                        <span class="TypeDelete text-danger cpointer" id="@item.VehicleTypeId"><i class="icon-trash"></i></span>
+                                    </div>
+                                </div>
+                            </td>
+
+                        </tr>
+
+                    }
+                </tbody>
+
+            </table>
+
+
+
+
+
+        </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+            @*Save Data Modal*@
+            <form id="vehicleTypeForm">
+                <div class="modal fade" id="VehicleTypeForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <span class="modal-title" id="exampleModalLabel">VEHICLE TYPE NAME</span>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="row">
+
+                                    <div class="form-group">
+                                        <label class="control-label">Vehicle Name <span class="text-danger">*</span></label>
+                                        <input class="form-control" type="text" name="TypeName" id="VName" placeholder="Enter Name" />
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger closeModal" data-dismiss="modal">Close</button>
+                                <button type="button" id="savetype" class="btn btn-primary">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+
+
+            @*Edit Data Modal*@
+
+
+            <form id="vehicleEdit">
+                <div class="modal fade" id="VehicleTypeEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header bg-primary">
+                                <span class="modal-title" id="exampleModalLabel">VEHICLE TYPE NAME</span>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span class="text-danger" aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="row">
+
+                                    <input type="number" hidden id="VtypeId" />
+                                    <div class="form-group">
+                                        <label class="control-label">Vehicle Name <span class="text-danger">*</span></label>
+                                        <input class="form-control" type="text" name="TypeName" id="ETypeName" placeholder="Enter Name" />
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger closeModal" data-dismiss="modal">Close</button>
+                                <button type="button" id="updatetype" class="btn btn-primary">Update</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <script src="~/Javascript/VehicleTypeCrud.js"></script>

@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h6 class="panel-title">Generate Report<a class="heading-elements-toggle"><i class="icon-more"></i></a></h6>
+
+        </div>
+
+        <div class="panel-body">
+
+           
+
+                <div class="form-group">
+
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <label class="control-label">From Date <span class="text-danger">*</span> </label>
+                            <input class="form-control border-800" id="Fromdate" name="Fromdate" required="required" type="date" />
+                        </div>
+                        <div class="col-lg-4">
+                            <label class="control-label">To Date <span class="text-danger">*</span> </label>
+                            <input class="form-control border-800" id="Todate" name="Todate" required="required" type="date" />
+                        </div>
+                        <div class="col-lg-4">
+                            <label class="control-label">Report Type <span class="text-danger">*</span> </label>
+                            @{
+                                List<PLAZAMANAGEMENTSYSTEM.Models.ReportType> vehicleType = new PLAZAMANAGEMENTSYSTEM.Models.ReportType().GetAllReportType();
+                            }
+                            @Html.DropDownList("ReportTypeId", vehicleType.Select(p => new SelectListItem() { Text = p.ReportName, Value = p.ReportTypeId.ToString() }), new { @class = "form-control selectpicker border-800", data_style = "btn-default btn-xs", data_width = "100%" })
+
+                        </div>
+
+
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-lg-2 col-lg-offset-10">
+                        <button type="button" class="btn btn-danger btn-xs heading-btn ReportBtn"><i class="icon-printer position-left"></i> Print</button>
+                    </div>
+               
+</div>
+                   
+
+                </div>
+  
+
+
+
+          
+
+        </div>
+    </div>
+
+
+</div>
+
+<script src="~/Javascript/GenerateReport.js"></script>

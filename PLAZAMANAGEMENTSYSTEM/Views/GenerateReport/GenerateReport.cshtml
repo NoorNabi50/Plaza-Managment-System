@@ -1,0 +1,276 @@
+﻿@model IEnumerable<PLAZAMANAGEMENTSYSTEM.Models.Report>
+
+@{ 
+
+    Layout = null;
+}
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            margin-top: 20px;
+            background: #eee;
+        }
+
+        /*Invoice*/
+        .invoice .top-left {
+            font-size: 65px;
+            color: #3ba0ff;
+        }
+
+
+        .invoice .top-right {
+            text-align: right;
+            padding-right: 20px;
+        }
+
+        .invoice .table-row {
+            margin-left: -15px;
+            margin-right: -15px;
+            margin-top: 25px;
+        }
+
+        .invoice .payment-info {
+            font-weight: 500;
+        }
+
+        .invoice .table-row .table > thead {
+            border-top: 1px solid #ddd;
+        }
+
+            .invoice .table-row .table > thead > tr > th {
+                border-bottom: none;
+            }
+
+        .invoice .table > tbody > tr > td {
+            padding: 8px 20px;
+        }
+
+        .invoice .invoice-total {
+            margin-right: -10px;
+            font-size: 16px;
+        }
+
+        .invoice .last-row {
+            border-bottom: 1px solid #ddd;
+        }
+
+        .invoice-ribbon {
+            width: 85px;
+            height: 88px;
+            overflow: hidden;
+            position: absolute;
+            top: -1px;
+            right: 14px;
+        }
+
+        .ribbon-inner {
+            text-align: center;
+            -webkit-transform: rotate(45deg);
+            -moz-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            -o-transform: rotate(45deg);
+            position: relative;
+            padding: 7px 0;
+            left: -5px;
+            top: 11px;
+            width: 120px;
+            background-color: #66c591;
+            font-size: 15px;
+            color: #fff;
+        }
+
+            .ribbon-inner:before, .ribbon-inner:after {
+                content: "";
+                position: absolute;
+            }
+
+            .ribbon-inner:before {
+                left: 0;
+            }
+
+            .ribbon-inner:after {
+                right: 0;
+            }
+
+        @@media(max-width:575px) {
+            .invoice .top-left, .invoice .top-right, .invoice .payment-details {
+                text-align: center;
+            }
+
+            .invoice .from, .invoice .to, .invoice .payment-details {
+                float: none;
+                width: 100%;
+                text-align: center;
+                margin-bottom: 25px;
+            }
+
+                .invoice p.lead, .invoice .from p.lead, .invoice .to p.lead, .invoice .payment-details p.lead {
+                    font-size: 22px;
+                }
+
+            .invoice .btn {
+                margin-top: 10px;
+            }
+        }
+
+        @@media print {
+            .invoice {
+                width: 900px;
+                height: 800px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel invoice">
+                    <div class="panel-body">
+
+                        <div class="row">
+                            <div class="col-md-4">
+
+
+
+                            </div>
+                            <div class="col-md-4">
+
+                                <h2 class="text-center">Smart Plaza System</h2>
+                                <p class="text-center">
+                                    ABC market,Plot  Karachi
+                                    <br>
+                                    Ph :03313584096
+
+                                    <br />
+                                    <i class="icon-facebook2"> noorbrohi69@gmail.com</i>
+
+                                </p>
+
+
+                            </div>
+
+                            <div class="col-md-4">
+
+
+
+                            </div>
+                        </div>
+
+
+                        <h3 style="border: 1px solid; border-left: none;border-right: none;" class="text-center border-dark">@Model.First().Report_Name  Report</h3>
+
+                        <br>
+                        <div class="row">
+
+                            <div class="col-md-12">
+
+                                  
+
+                                <span style="font-size: 15px;"> Date: <b>@Model.First().Date</b> </span>
+                                <br><br>
+                                <span style="font-size: 15px;"> Created By :  <b>@Model.First().CreatedBy  </b> </span>
+                                <br><br>
+
+                            </div>
+
+
+
+                        </div>
+                        <br />
+                        <div class="row table-row">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+
+                                        <th style="width:50%">Vehicle Type</th>
+                                        <th class="text-right" style="width:15%">Parked</th>
+
+                                        <th class="text-right" style="width:15%">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+
+                                            <td>@item.TypeName</td>
+                                            <td class="text-right">@item.TotalVehicleTypePassed</td>
+                                            <td class="text-right">@item.Total_Amount_of_Each_Vehicle</td>
+
+
+                                        </tr>
+
+
+                                    }
+
+                                    <tr>
+
+
+                                        <td>
+
+
+                                        </td>
+
+                                        <td>
+                                            Total Parked :
+                                            <b><span>@Model.First().Total_Vehicles_Passed</span></b>
+                                        </td>
+                                        <td>
+                                            Total Amount :   <b><span>@Model.First().TotalAmount </span></b>
+
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                      
+
+
+                        <div class="card">
+                            <div class="card-body">
+
+                                <span class="text-indigo-700">Note : </span>
+                                <br />
+                                <span class="text-indigo-700">
+
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+</body>
+
+</html>
+
+

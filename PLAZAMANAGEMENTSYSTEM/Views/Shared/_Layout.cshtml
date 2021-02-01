@@ -1,0 +1,311 @@
+﻿
+@{
+    Layout = null;
+}
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Plaza Managment System</title>
+
+    <!-- Global stylesheets -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+    <link href="~/assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
+    <link href="~/assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+
+    <link href="~/assets/css/components.css" rel="stylesheet" type="text/css">
+    <link href="~/assets/css/colors.css" rel="stylesheet" type="text/css">
+    <!-- /global stylesheets -->
+    <!-- Core JS files -->
+    <script type="text/javascript" src="~/assets/js/plugins/loaders/pace.min.js"></script>
+    <script type="text/javascript" src="~/assets/js/core/libraries/jquery.min.js"></script>
+    <script type="text/javascript" src="~/assets/js/core/libraries/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/assets/js/plugins/loaders/blockui.min.js"></script>
+    <!-- /core JS files -->
+    <!-- Theme JS files -->
+    <script type="text/javascript" src="~/assets/js/plugins/visualization/d3/d3.min.js"></script>
+    <script type="text/javascript" src="~/assets/js/plugins/visualization/d3/d3_tooltip.js"></script>
+    <script type="text/javascript" src="~/assets/js/plugins/forms/styling/uniform.min.js"></script>
+    <script type="text/javascript" src="~/assets/js/plugins/forms/selects/bootstrap_multiselect.js"></script>
+    <script type="text/javascript" src="~/assets/js/plugins/ui/moment/moment.min.js"></script>
+    <script type="text/javascript" src="~/assets/js/plugins/pickers/daterangepicker.js"></script>
+    <script type="text/javascript" src="~/assets/js/plugins/ui/nicescroll.min.js"></script>
+
+    <script type="text/javascript" src="~/assets/js/core/app.js"></script>
+    <!---- <script type="text/javascript" src="~/assets/js/pages/dashboard.js"></script>-->
+    <script type="text/javascript" src="~/assets/js/pages/layout_fixed_custom.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+    <!-- /theme JS files -->
+    <style>
+        .navbar-brand {
+            float: left;
+            padding: 15px 20px;
+            font-size: 26px;
+            line-height: 20px;
+            height: 50px;
+        }
+
+        .cpointer {
+            cursor: pointer;
+        }
+
+
+
+        #loader {
+            position: absolute;
+            left: 60%;
+            top: 50%;
+            z-index: 1;
+            width: 60px;
+            height: 60px;
+            margin: -75px 0 0 -75px;
+            border: 16px solid black;
+            border-radius: 10%;
+            border-top: 16px solid #3498db;
+            width: 60px;
+            height: 60px;
+            -webkit-animation: spin 2s linear infinite;
+            animation: spin 2s linear infinite;
+        }
+
+        @@-webkit-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @@keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Add animation to "page content" */
+        .animate-bottom {
+            position: relative;
+            -webkit-animation-name: animatebottom;
+            -webkit-animation-duration: 1s;
+            animation-name: animatebottom;
+            animation-duration: 1s
+        }
+
+        @@-webkit-keyframes animatebottom {
+            from {
+                bottom: -100px;
+                opacity: 0
+            }
+
+            to {
+                bottom: 0px;
+                opacity: 1
+            }
+        }
+
+        @@keyframes animatebottom {
+            from {
+                bottom: -100px;
+                opacity: 0
+            }
+
+            to {
+                bottom: 0;
+                opacity: 1
+            }
+        }
+
+        #Allcontent {
+            opacity: 0.5;
+        }
+    </style>
+</head>
+
+<body onload="myFunction()">
+
+    <div id="loader"></div>
+    <div id="Allcontent">
+        <!-- Main navbar -->
+        <div class="navbar bg-blue-800 navbar-fixed-top">
+            <div class="navbar-header">
+                <a class="navbar-brand text-white" href="index.html">Smart Plaza System</a>
+
+                <ul class="nav navbar-nav visible-xs-block">
+                    <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
+                    <li><a class="sidebar-mobile-main-toggle"><i class="icon-paragraph-justify3"></i></a></li>
+                </ul>
+            </div>
+
+            @*<div class="navbar-collapse collapse" id="navbar-mobile">
+
+
+            @if (User.Identity.IsAuthenticated)
+            {
+
+                <span class="text-white pull-right mr-20">WelCome-@User.Identity.Name</span>
+            }
+
+
+
+
+        </div>*@
+            <div class="navbar-right">
+
+
+                <ul class="nav navbar-nav">
+
+
+                    <li class="dropdown dropdown-user">
+                        <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            @*<img src="~/assets/images/placeholder.jpg" alt="">*@
+                            @if (User.Identity.IsAuthenticated)
+                            {
+
+                                <span class="text-white pull-right mr-20">WelCome-@User.Identity.Name</span>
+                            }
+                            <i class="caret"></i>
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-menu-right">
+                          <li><a href="/UserAuthentication/Logout"><i class="icon-switch2"></i> Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+
+
+        </div>
+        <!-- /main navbar -->
+        <!-- Page container -->
+        <div class="page-container">
+
+            <!-- Page content -->
+            <div class="page-content">
+
+                <!-- Main sidebar -->
+                <div class="sidebar sidebar-main sidebar-fixed">
+                    <div class="sidebar-content" tabindex="0" style="overflow-y: hidden; outline: none;">
+
+                        <!-- User menu -->
+                        <div class="sidebar-user">
+                            <div class="category-content">
+
+                                <ul class="navigation navigation-main navigation-accordion">
+
+                                    <!-- Main -->
+                                    <li class="navigation-header"><span></span> <i class="icon-menu" title="" data-original-title="Main pages"></i></li>
+                                    <li><a href="/Dashboard/Index"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
+                                    <li>
+                                        <a href="#" class="has-ul"><i class="icon-stack2"></i> <span>Operations</span></a>
+                                        <ul>
+                                            <li><a href="/VehicleType/Index"><i class="icon-bus"></i>Vehicle Type</a></li>
+                                            <li><a href="/ParkingFloors/Index"><i class="icon-office"></i>Floors</a></li>
+                                            <li><a href="/ParkingSlot/Index"><i class="icon-list-numbered"></i>Slots</a></li>
+                                            <li><a href="/AmountForEachVechileType/Index"><i class="icon-coin-dollar"></i>Vehicle Amount</a></li>
+                                            <li><a href="/ReportType/Index"><i class="icon-files-empty2"></i>Report Type</a></li>
+
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="/GenerateReport/Index" class=""><i class="icon-copy"></i> <span>Reporting</span></a>
+
+                                    </li>
+
+                                    <!-- /page kits -->
+
+                                </ul>
+
+
+
+                            </div>
+                        </div>
+                        <!-- /user menu -->
+                        <!-- Main navigation -->
+                        <!-- /main navigation -->
+
+                    </div>
+                </div>
+                <!-- /main sidebar -->
+                <!-- Main content -->
+                <div class="content-wrapper">
+
+
+
+                    <!-- Page header -->
+                    <!-- /page header -->
+                    <!-- Content area -->
+                    <div style="margin-top: 84px;" class="content">
+                        @RenderBody()
+                        <!-- Main charts -->
+                        <!-- /main charts -->
+                        <!-- Dashboard content -->
+                        <!-- /dashboard content -->
+                        <!-- Footer -->
+                    
+                        <!-- /footer -->
+
+                    </div>
+                    <!-- /content area -->
+
+                </div>
+                <!-- /main content -->
+
+            </div>
+            <!-- /page content -->
+
+        </div>
+        <!-- /page container -->
+
+
+    </div>
+
+
+
+
+
+    <div class="daterangepicker dropdown-menu ltr opensleft"><div class="calendars"><div class="calendar left"><div class="calendar-table"></div><div class="daterangepicker_input"><div class="calendar-time" style="display: none;"><div></div></div></div></div><div class="calendar right"><div class="calendar-table"></div><div class="daterangepicker_input"><div class="calendar-time" style="display: none;"><div></div></div></div></div></div><div class="ranges"><ul><li data-range-key="Today">Today</li><li data-range-key="Yesterday">Yesterday</li><li data-range-key="Last 7 Days">Last 7 Days</li><li data-range-key="Last 30 Days">Last 30 Days</li><li data-range-key="This Month">This Month</li><li data-range-key="Last Month">Last Month</li><li data-range-key="Custom Range">Custom Range</li></ul><div class="daterangepicker-inputs"><div class="daterangepicker_input"><span class="start-date-label">Start date:</span><input class="form-control" type="text" name="daterangepicker_start" value=""><i class="icon-calendar3"></i></div><div class="daterangepicker_input"><span class="end-date-label">End date:</span><input class="form-control" type="text" name="daterangepicker_end" value=""><i class="icon-calendar3"></i></div></div><div class="range_inputs"><button class="applyBtn btn btn-sm btn-small bg-slate-600 btn-block" disabled="disabled" type="button">Apply</button> <button class="cancelBtn btn btn-sm btn-small btn-default btn-block" type="button">Cancel</button></div></div></div><div class="d3-tip" style="position: absolute; top: 0px; display: none; pointer-events: none; box-sizing: border-box;"></div><div class="d3-tip" style="position: absolute; top: 0px; display: none; pointer-events: none; box-sizing: border-box;"></div><div class="d3-tip" style="position: absolute; top: 0px; display: none; pointer-events: none; box-sizing: border-box;"></div><div class="d3-tip" style="position: absolute; top: 0px; display: none; pointer-events: none; box-sizing: border-box;"></div><div class="d3-tip" style="position: absolute; top: 0px; display: none; pointer-events: none; box-sizing: border-box;"></div><div class="d3-tip" style="position: absolute; top: 0px; display: none; pointer-events: none; box-sizing: border-box;"></div><div class="d3-tip" style="position: absolute; top: 0px; display: none; pointer-events: none; box-sizing: border-box;"></div><div class="d3-tip" style="position: absolute; top: 0px; display: none; pointer-events: none; box-sizing: border-box;"></div><div id="ascrail2000" class="nicescroll-rails nicescroll-rails-vr" style="padding-right: 0.5px; padding-top: 1.5px; padding-bottom: 1.5px; width: 3px; z-index: 99; cursor: default; position: fixed; top: 48px; left: 256.5px; height: 574px; display: none; opacity: 0;"><div class="nicescroll-cursors" style="position: relative; top: 0px; float: right; width: 3px; height: 108px; background-color: rgb(204, 204, 204); background-clip: padding-box; border-radius: 5px;"></div></div>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+    <script src="~/assets/jasonday-printThis-f73ca19/printThis.js"></script>
+    <script>
+        var myVar;
+
+        function myFunction() {
+            myVar = setTimeout(showPage, 500);
+        }
+
+        function showPage() {
+            document.getElementById("loader").style.display = "none";
+            document.getElementById("Allcontent").style.opacity = 1;
+        }
+
+        $(document).ready(function () {
+            $('.jqueryTblPlugin').DataTable();
+        });
+
+
+    </script>
+
+
+    <script src="~/assets/SweetAlert/SweetAlertsTemp.js"></script>
+
+
+
+</body>
+</html>

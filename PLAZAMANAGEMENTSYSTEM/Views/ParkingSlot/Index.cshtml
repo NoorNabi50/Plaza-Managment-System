@@ -1,0 +1,179 @@
+﻿@model IEnumerable<PLAZAMANAGEMENTSYSTEM.Models.ParkingSlot>
+
+
+
+
+<div class="panel panel-flat">
+
+    <div class="panel-heading mb-5">
+
+        <h1><u>Parking Slots</u></h1>
+        <div class="col-sm-12">
+            <a class="btn bg-primary-800 btn-sm pull-right" data-toggle="modal" data-target="#SlotFormmodal">Add <i class="icon-add"></i></a>
+        </div>
+    </div>
+    <div class="panel-body">
+
+        <div class="table-responsive">
+
+            <table class="jqueryTblPlugin table table-xxs table-condensed table-bordered table-striped table-hover bg-lightgray">
+
+                <thead>
+                    <tr class="bg-primary">
+                        <th>Slot Name</th>
+                        <th>Floor</th>
+                        <th>Actions</th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    @foreach (PLAZAMANAGEMENTSYSTEM.Models.ParkingSlot item in Model)
+                    {
+                        <tr>
+
+                            <td>@item.SlotName</td>
+                            <td>@item.FloorName</td>
+                            <td>
+                                <div class="row">
+
+                                    <div class="col-md-6">
+                                        <span class="text-blue cpointer Edit" data-toggle="modal" data-target="#SlotForEditmodal" id="@item.SlotId"><i class="icon-pencil7"></i></span>
+
+                                        <span class="DeleteSlot cpointer text-danger" id="@item.SlotId"><i class="icon-trash"></i></span>
+                                    </div>
+                                </div>
+                            </td>
+
+                        </tr>
+
+                    }
+                </tbody>
+
+            </table>
+            
+        </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+        @*SAVE FORM*@
+
+
+
+        <form id="SlotForm">
+            <div class="modal fade" id="SlotFormmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <span class="modal-title" id="exampleModalLabel">Slots</span>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="row">
+
+                                <div class="form-group">
+                                    <label class="control-label">Slot Name <span class="text-danger">*</span></label>
+                                    <input class="form-control" type="text" name="SlotName" id="SlotName" placeholder="Enter Name" />
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+
+                                <div class="form-group">
+                                    <label class="control-label">Floor Name <span class="text-danger">*</span></label>
+
+                                    @{
+                                        List<PLAZAMANAGEMENTSYSTEM.Models.ParkingFloors> ParkingFloors = new PLAZAMANAGEMENTSYSTEM.Models.ParkingFloors().GetAllParkingFloors();
+                                    }
+                                    @Html.DropDownList("FloorId", ParkingFloors.Select(p => new SelectListItem() { Text = p.FloorName, Value = p.FloorId.ToString() }), new { @class = "form-control", data_style = "btn-default btn-xs", data_width = "100%" })
+
+                                </div>
+                            </div>
+
+
+
+
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger closeModal" data-dismiss="modal">Close</button>
+                            <button type="button" id="saveslot" class="btn btn-primary">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+
+        @*UPDATE FORM*@
+
+
+        <form id="SlotEditForm">
+            <div class="modal fade" id="SlotForEditmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <span class="modal-title" id="exampleModalLabel">Slots</span>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="row">
+
+                                <input type="number" hidden id="SlotId" />
+
+                                <div class="form-group">
+                                    <label class="control-label">Slot Name <span class="text-danger">*</span></label>
+                                    <input class="form-control" type="text" name="SlotName" id="ESlotName" placeholder="Enter Name" />
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+
+                                <div class="form-group">
+                                    <label class="control-label">Floor Name <span class="text-danger">*</span></label>
+
+                                    @{
+                                        List<PLAZAMANAGEMENTSYSTEM.Models.ParkingFloors> ParkingF = new PLAZAMANAGEMENTSYSTEM.Models.ParkingFloors().GetAllParkingFloors();
+                                    }
+                                    @Html.DropDownList("floorId", ParkingF.Select(p => new SelectListItem() { Text = p.FloorName, Value = p.FloorId.ToString() }), new { @class = "form-control floorId", data_style = "btn-default btn-xs", data_width = "100%" })
+
+                                </div>
+                            </div>
+
+
+
+
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger closeModal" data-dismiss="modal">Close</button>
+                            <button type="button" id="updateslot" class="btn btn-primary">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <script src="~/Javascript/ParkingSlotsCrud.js"></script>

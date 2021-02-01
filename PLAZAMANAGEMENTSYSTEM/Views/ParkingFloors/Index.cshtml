@@ -1,0 +1,175 @@
+﻿@model IEnumerable<PLAZAMANAGEMENTSYSTEM.Models.ParkingFloors>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<div class="panel panel-flat">
+
+    <div class="panel-heading mb-5">
+            <h1><u>Parking Floors</u></h1>
+        <div class="col-sm-12">
+            <a class="btn bg-primary-800 btn-sm pull-right" data-toggle="modal" data-target="#FloorFormmodal">Add <i class="icon-add"></i></a>
+        </div>
+    </div>
+
+    <div class="panel-body">
+
+        <div class="table-responsive">
+
+
+            <table class="jqueryTblPlugin table table-xxs table-condensed table-bordered table-striped table-hover bg-lightgray">
+
+                <thead>
+                    <tr class="bg-primary">
+                        <th>Floor Name</th>
+                        <th>TotalSpace</th>
+                        <th>Actions</th>
+
+                    </tr>
+                </thead>
+
+                <tbody class="myFloorbody">
+
+                    @foreach (PLAZAMANAGEMENTSYSTEM.Models.ParkingFloors item in Model)
+                    {
+                        <tr>
+
+                            <td>@item.FloorName</td>
+                            <td>@item.TotalSpace</td>
+                            <td>
+
+                                <div class="row">
+
+                                    <div class="col-md-6">
+                                        <span style="color:white" class="Edit text-blue cpointer" data-toggle="modal" data-target="#UpdateFloorForm" id="@item.FloorId"><i class="icon-pencil7"></i></span>
+
+                                        <span class="DeleteFloor text-danger cpointer" id="@item.FloorId"><i class="icon-trash"></i></span>
+                                    </div>
+                                </div>
+                            </td>
+
+                        </tr>
+
+                    }
+                </tbody>
+
+            </table>
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+        </div></div>
+
+
+
+
+
+
+            @*Save Modal*@
+
+            <form id="SaveFloorForm">
+                <div class="modal fade" id="FloorFormmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <span class="modal-title" id="exampleModalLabel">Floors</span>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="row">
+
+                                    <div class="form-group">
+                                        <label class="control-label">Floor Name <span class="text-danger">*</span></label>
+                                        <input class="form-control" type="text" name="FloorName" id="FName" placeholder="Enter Name" />
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+
+                                    <div class="form-group">
+                                        <label class="control-label">TotalSpace <span class="text-danger">*</span></label>
+                                        <input class="form-control" type="text" name="TotalSpace" id="TotalSpace" placeholder="Enter Name" />
+                                    </div>
+                                </div>
+
+
+
+
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger closeModal" data-dismiss="modal">Close</button>
+                                <button type="button" id="savefloor" class="btn btn-primary">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+
+
+
+
+            @*Update Modal*@
+
+            <form id="EFloorForm">
+                <div class="modal fade" id="UpdateFloorForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <span class="modal-title" id="exampleModalLabel">Floors</span>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="row">
+                                    <input type="number" hidden id="FloorId" />
+                                    <div class="form-group">
+                                        <label class="control-label">Floor Name <span class="text-danger">*</span></label>
+                                        <input class="form-control" type="text" name="FloorName" id="FNameE" placeholder="Enter Name" />
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+
+                                    <div class="form-group">
+                                        <label class="control-label">TotalSpace <span class="text-danger">*</span></label>
+                                        <input class="form-control" type="text" name="TotalSpace" id="TotalSpaceE" placeholder="Enter Name" />
+                                    </div>
+                                </div>
+
+
+
+
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger closeModal" data-dismiss="modal">Close</button>
+                                <button type="button" id="updatefloor" class="btn btn-primary">Update</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <script src="~/Javascript/ParkingFloors.js"></script>

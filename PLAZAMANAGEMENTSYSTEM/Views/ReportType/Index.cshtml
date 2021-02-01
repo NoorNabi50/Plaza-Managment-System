@@ -1,0 +1,150 @@
+﻿@model IEnumerable<PLAZAMANAGEMENTSYSTEM.Models.ReportType>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<div class="panel panel-flat">
+
+    <div class="panel-heading mb-5">
+
+        <h1><u>Report Type</u></h1>
+        <div class="col-sm-12">
+            <a class="btn bg-primary-800 btn-sm pull-right" data-toggle="modal" data-target="#ReportTypeForm">Add <i class="icon-add"></i></a>
+        </div>
+    </div>
+    <div class="panel-body">
+
+        <div class="table-responsive">
+
+
+            <table class="jqueryTblPlugin table table-xxs table-condensed table-bordered table-striped table-hover bg-lightgray">
+
+                <thead>
+                    <tr class="bg-primary">
+                        <th>ReportType Name</th>
+                        <th>Actions</th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    @foreach (PLAZAMANAGEMENTSYSTEM.Models.ReportType item in Model)
+                    {
+                        <tr>
+
+                            <td>@item.ReportName</td>
+                            <td>
+                                <div class="row">
+
+                                    <div class="col-md-6">
+                                        <span class="Edit text-blue cpointer" id="@item.ReportTypeId" data-toggle="modal" data-target="#ReportTypeEForm"><i class="icon-pencil7"></i></span>
+
+                                        <span class="Delete text-danger cpointer" id="@item.ReportTypeId"><i class="icon-trash"></i></span>
+                                    </div>
+                                </div>
+                            </td>
+
+                        </tr>
+
+                    }
+                </tbody>
+
+            </table>
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+            @*Save Data Modal*@
+            <form id="reportTypeForm">
+                <div class="modal fade" id="ReportTypeForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <span class="modal-title" id="exampleModalLabel">VEHICLE TYPE NAME</span>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="row">
+
+                                    <div class="form-group">
+                                        <label class="control-label">ReportType Name <span class="text-danger">*</span></label>
+                                        <input class="form-control" type="text" name="ReportName" id="RName" placeholder="Enter Name" />
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger closeModal" data-dismiss="modal">Close</button>
+                                <button type="button" id="savereporttype" class="btn btn-primary">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+
+
+
+
+
+            @*Edit Data Modal*@
+            <form id="reportTypeEForm">
+                <div class="modal fade" id="ReportTypeEForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <span class="modal-title" id="exampleModalLabel">REPORT TYPE NAME</span>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="row">
+
+                                    <input type="number" hidden id="ReportTId" />
+
+
+                                    <div class="form-group">
+                                        <label class="control-label">ReportType Name <span class="text-danger">*</span></label>
+                                        <input class="form-control" type="text" name="ReportName" id="REName" placeholder="Enter Name" />
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger closeModal" data-dismiss="modal">Close</button>
+                                <button type="button" id="updatereporttype" class="btn btn-primary">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+
+            <script src="~/Javascript/ReportTypeCrud.js"></script>
+

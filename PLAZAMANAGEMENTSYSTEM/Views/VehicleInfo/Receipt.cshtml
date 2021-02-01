@@ -1,0 +1,64 @@
+﻿@model PLAZAMANAGEMENTSYSTEM.Models.VehicleInfo
+
+
+@{ Layout = null; }
+    
+    <div id="PrintContent">
+        <div style="border:1px dashed black;">
+
+            <div style="text-align:center">
+                <h2>Smart Plaza System</h2>
+
+                <p style="font-size: 11px;">ABCDEF 1623 Karachi Pk</p>
+            </div>
+
+
+            <div style="border: 1px solid black;">
+
+                <h4 style="text-align:center">Customer Receipt</h4>
+            </div>
+
+
+            <br>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <span style="margin-left:10px;">Vehicle No Plate : </span> @Model.VehicleNoPlate
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-12 ml-3">
+                    <span style="margin-left:10px;">Color : </span> @Model.Color
+                </div>
+            </div>
+            <br>
+
+            <div class="row">
+                <div class="col-sm-12 ml-3">
+                    <span style="margin-left:10px;">Floor Name: </span> @Model.FloorName
+                </div>
+            </div>
+
+            <br>
+
+            <div class="row">
+                <div class="col-sm-12 ml-3">
+                    <span style="margin-left:10px;">Slot Name : </span> @Model.SlotName
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-12 ml-3">
+                    <span style="margin-left:10px;">Date & Time Of Entry : </span> @Model.Date
+                </div>
+            </div>
+
+
+
+            <br><br>
+
+            <h3 style="text-align:center">Thank you & Drive Safely!</h3>
+        </div>
+    </div>
+
